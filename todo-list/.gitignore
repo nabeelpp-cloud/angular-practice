@@ -1,0 +1,62 @@
+# Node modules
+node_modules/
+
+# Angular build / CLI cache
+dist/
+dist-*/
+.out/
+.out-tsc/
+.angular/
+.angular/cache/
+
+# Compiled output
+*.js
+*.js.map
+*.d.ts
+
+# TypeScript incremental cache
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime env files (may contain secrets)
+.env
+.env.*
+.env.local
+
+# Test coverage and results
+coverage/
+coverage-*/
+.jest/
+test-results/
+
+# Cypress
+cypress/videos/
+cypress/screenshots/
+
+# Storybook build
+storybook-static/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Misc caches and archives
+.cache/
+.sass-cache/
+*.tgz
+
+# Firebase / local emulators
+.firebase/

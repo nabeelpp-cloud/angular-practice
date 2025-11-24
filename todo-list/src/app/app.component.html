@@ -1,0 +1,56 @@
+<div class="main">
+  <div class="task-card">
+    
+    <div class="app-header">
+      <h1>My Tasks</h1>
+      <p>{{ toDoList.length }} pending, {{ completedList.length }} completed</p>
+    </div>
+
+    <div class="section" *ngIf="toDoList.length > 0">
+      <div class="section-header">Todo Tasks
+        <div class="button" (click)="showAddTask.set(true)">Add Task</div>
+      </div>
+      <div class="task-list">
+        <div *ngFor="let todo of toDoList; trackBy: trackById" class="task-row">
+          <label class="custom-checkbox">
+            <input type="checkbox" [checked]="todo.completed" (change)="toggleChecked(todo.id)" />
+            <span class="checkmark"></span>
+          </label>
+          <div class="title">{{ todo.title }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section completed-section" *ngIf="completedList.length > 0">
+      <div class="section-header">Completed</div>
+      <div class="task-list">
+        <div *ngFor="let completed of completedList; trackBy: trackById" class="task-row is-done">
+          <label class="custom-checkbox">
+            <input type="checkbox" [checked]="completed.completed" (change)="toggleChecked(completed.id)" />
+            <span class="checkmark"></span>
+          </label>
+          <div class="title">{{ completed.title }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="toDoList.length === 0 && completedList.length === 0" class="empty-state">
+      <p>No tasks found. Enjoy your day!</p>
+    </div>
+
+  </div>
+  @if(showAddTask()){
+
+    <div class="modal-backdrop">
+      <div class="modal">
+        <h2>Add New Task</h2>
+        <input type="text" placeholder="Task Title" [(ngModel)]="newTaskTitle"/>
+        <div class="modal-actions">
+          <button (click)="addTask()">Add Task</button>
+          <button (click)="showAddTask.set(false)">Cancel</button>
+        </div>
+      </div>
+    </div>
+  }
+
+</div>
