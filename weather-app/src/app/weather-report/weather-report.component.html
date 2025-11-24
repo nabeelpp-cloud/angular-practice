@@ -1,0 +1,55 @@
+<div class="weather-container">
+  
+  <div class="weather-card" *ngIf="data$ | async as data; else noData">
+    
+    <div class="card-header">
+      <div class="location">
+        <h2>{{ data.name }}</h2>
+        <span class="country">{{ data.sys?.country }}</span>
+      </div>
+      <div class="date">{{ today | date:'EEE, MMM d' }}</div>
+    </div>
+
+    <div class="card-body">
+      <div class="weather-icon">
+        <img [src]="'https://openweathermap.org/img/wn/' + data.weather?.[0]?.icon + '@4x.png'" alt="Weather Icon">
+      </div>
+      <div class="temp-display">
+        <span class="degree">{{ data.main?.temp | number:'1.0-0' }}°</span>
+        <div class="condition">{{ data.weather?.[0]?.description }}</div>
+      </div>
+    </div>
+
+    <div class="card-details">
+      
+      <div class="detail-item">
+        <span class="label">Feels Like</span>
+        <span class="value">{{ data.main?.feels_like | number:'1.0-0' }}°</span>
+      </div>
+
+      <div class="detail-item">
+        <span class="label">Humidity</span>
+        <span class="value">{{ data.main?.humidity }}%</span>
+      </div>
+
+      <div class="detail-item">
+        <span class="label">Wind</span>
+        <span class="value">{{ data.wind?.speed }} <span class="unit">m/s</span></span>
+      </div>
+
+      <div class="detail-item">
+        <span class="label">Pressure</span>
+        <span class="value">{{ data.main?.pressure }} <span class="unit">hPa</span></span>
+      </div>
+
+    </div>
+  </div>
+
+  <ng-template #noData>
+    <div class="empty-state">
+      <div class="empty-icon">☁️</div>
+      <p>Select a city to view the forecast.</p>
+    </div>
+  </ng-template>
+
+</div>

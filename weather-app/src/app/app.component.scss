@@ -1,0 +1,145 @@
+/* Variables to match your Weather Card */
+$primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$bg-color: #f3f4f8;
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: $bg-color;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* --- Toolbar Styling --- */
+.app-toolbar {
+  background: $primary-gradient; /* Overrides default primary color */
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 4px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  i {
+    font-size: 1.2rem;
+    opacity: 0.9;
+  }
+}
+
+/* --- Layout Container --- */
+.main-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Search Section --- */
+/* --- Search Section --- */
+.search-section {
+  width: 100%;
+  max-width: 380px;
+  margin-bottom: 10px;
+
+  .city-selector {
+    width: 100%;
+
+    /* 1. Target the Wrapper, not the flex container. 
+          This ensures the background covers the whole area. */
+    ::ng-deep .mat-mdc-text-field-wrapper {
+      //background-color: white !important;
+      border-radius: 12px !important;
+      
+      /* 2. This padding prevents text from touching the borders */
+      padding-left: 16px !important; 
+      padding-right: 16px !important;
+      /* 3. Add the shadow here */
+      //box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: box-shadow 0.3s ease;
+    }
+
+    /* 4. Completely remove the default border lines */
+    ::ng-deep .mdc-notched-outline__leading,
+    ::ng-deep .mdc-notched-outline__notch,
+    ::ng-deep .mdc-notched-outline__trailing {
+      border: none !important; 
+    }
+
+    /* 5. Fix the Infix (The area holding the label and text) 
+          to ensure it fits inside our new padding */
+    ::ng-deep .mat-mdc-form-field-infix {
+      width: auto !important; /* Prevents it from overflowing */
+      padding-top: 16px !important; /* Adjust vertical centering */
+      padding-bottom: 16px !important;
+      min-height: unset !important;
+    }
+
+    /* Hover Effect */
+    &:hover ::ng-deep .mat-mdc-text-field-wrapper {
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  mat-icon {
+    color: #764ba2;
+    margin-right: 8px; /* Give the icon some breathing room */
+  }
+}
+
+/* --- Router Outlet Area --- */
+.content-area {
+  width: 100%;
+  animation: fadeUp 0.5s ease-out;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Prevent flex children from causing horizontal overflow on small screens */
+:host {
+  box-sizing: border-box;
+}
+
+.main-container,
+.search-section,
+.city-selector,
+.content-area {
+  min-width: 0;
+
+}
+
+/* Ensure text wraps instead of overflowing */
+.app-toolbar span,
+.city-selector,
+.city-selector .mat-mdc-select,
+.city-selector .mat-mdc-form-field-infix {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  
+}
+
+/* Truncate toolbar title if space is tight */
+.app-toolbar span:first-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 60vw;
+}
+
+/* Allow the material form-field internals to shrink inside flex containers */
+::ng-deep .mat-mdc-form-field-flex,
+::ng-deep .mat-mdc-select-value {
+  min-width: 0 !important;
+ 
+}
+
